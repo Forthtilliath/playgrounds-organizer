@@ -21,7 +21,7 @@ export function Card(props: Codepen) {
         <header class="leading-tight p-2 md:p-4 text-left">
           <h1 class="text-lg w-full">
             <ExternalLink
-              class="no-underline hover:underline text-black truncate block"
+              class="no-underline hover:underline text-black dark:text-slate-200 truncate block"
               href={endpoint + props.src}
             >
               {props.title}
@@ -30,9 +30,6 @@ export function Card(props: Codepen) {
         </header>
 
         <footer class="flex items-center flex-wrap gap-1 leading-none p-2 md:p-4">
-          <CardBadge tag={"aaaaa"} />
-          <CardBadge tag={"hg"} />
-          <CardBadge tag={"iojhi"} />
           <For each={props.tags}>{(tag) => <CardBadge tag={tag} />}</For>
           <ExternalLink
             class="no-underline text-grey-darker hover:text-red-dark"
