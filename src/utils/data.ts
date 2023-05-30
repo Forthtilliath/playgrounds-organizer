@@ -1,5 +1,5 @@
-export const endpoint = "https://codepen.io/forthtilliath/";
-export const pathImage = "./assets/projects/";
+export const endpoint = "https://codepen.io/forthtilliath";
+export const pathImage = "./assets/projects";
 export const tags = [
   "layout",
   "flex",

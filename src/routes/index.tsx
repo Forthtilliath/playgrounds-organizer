@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main class="text-center mx-auto text-gray-700 p-4">
       <h1 class="max-6-xs text-6xl text-sky-700 dark:text-sky-300 font-bold uppercase my-16">
-        Bienvenue sur la HomePage de mon Github
+        Bienvenue sur la HomePage de mon Codepen
       </h1>
 
       <Sidebar />

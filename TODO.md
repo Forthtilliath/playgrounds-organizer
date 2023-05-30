@@ -1,8 +1,24 @@
-- [ ] A
+Prop Thème => Object de classes => Color/Background-color
+
+Créer un store pour les tags
+- [x] : Par défault : []
+- [ ] : Cliquer sur un badge => push tags
+- [ ] : Codepens affichés en fonction des tags
+- [ ] : Filter tags => update tags instantly
+- [ ] : URL : AND => `/?q=css+array` / OR => `/?q=css|array`
+
+Array.from(new URLSearchParams(window.location.search))
+
+Sur le Setter => emit un event "changeUrl"
+Event changeUrl => pushState
+Function ???
+```js
+window.history.replaceState(null, "New Page Title", "/pathname/goes/here")
+```
 
 # Liste des catégories
 
-https://flowbite.com/docs/components/dropdowns/
+https://flowbite.com/docs/components/dropdowns/#dropdown-with-search
 
 ```html
 <button

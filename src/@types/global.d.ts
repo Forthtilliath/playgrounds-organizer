@@ -1,14 +1,20 @@
 import { tags } from "~/utils/data";
 
-type Tags = (typeof tags)[number];
 
 declare global {
+  type Tag = (typeof tags)[number];
+
   type Codepen = {
     id: number;
-    tags: UniqueArray<Tags[]>;
+    tags: UniqueArray<Tag[]>;
     src: string;
     title: string;
   };
+
+  type FilterStore = {
+    tags: Tag[],
+    type: 'conjunction' | 'disjunction'
+  }
 }
 
 export {};
