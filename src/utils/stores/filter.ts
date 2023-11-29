@@ -1,13 +1,21 @@
-import { createStore, produce } from "solid-js/store";
+import { createStore } from "solid-js/store";
 
-export const [filter, setFilter] = createStore<Tag[]>([]);
+export const [filter, setFilter] = createStore<FilterStore>({
+  query: "",
+  tags: [],
+  type: "conjunction",
 
-export function addTagToFilter(tag: Tag) {
-  setFilter(produce((f) => f.push(tag)));
-}
-
-export function removeTagToFilter(tag: Tag) {
-    setFilter(f => f.filter(t => t !== tag));
-}
+  addTagToFilter(tag: Tag) {
+    setFilter("tags", (tags) => [...tags, tag]);
+    // setFilter(produce((state) => state.tags.push(tag)));
+  },
+  removeTagToFilter(tag: Tag) {
+    setFilter("tags", (tags) => tags.filter((t) => t !== tag));
+    // setFilter(produce((state) => state.tags.filter((t) => t !== tag)));
+  },
+  setType(type: FilterStore["type"]) {
+    setFilter("type", type);
+  },
+});
 
 // https://www.solidjs.com/docs/latest#reconcile
