@@ -1,8 +1,11 @@
-import { For, createSignal } from "solid-js";
+import { For, createEffect, createSignal } from "solid-js";
 import { tags } from "~/utils/data";
+import { filter } from "~/utils/stores/filter";
 
 export function Sidebar() {
   const [open, setOpen] = createSignal(true);
+
+  createEffect(() => console.log(filter.type));
 
   return (
     <>
@@ -62,18 +65,8 @@ export function Sidebar() {
             Les projets doivent :
           </p>
           <div class="mt-2 flex flex-col gap-2">
-            <label>
-              <input type="radio" name="type-tag" checked />
-              <span class="text-slate-200 text-base pl-2 cursor-pointer">
-                avoir tous les tags
-              </span>
-            </label>
-            <label>
-              <input type="radio" name="type-tag" />
-              <span class="text-slate-200 text-base pl-2 cursor-pointer">
-                avoir au moins un tag
-              </span>
-            </label>
+            <InputType value="conjunction" label="avoir tous les tags" />
+            <InputType value="disjunction" label="avoir au moins un tag" />
           </div>
         </div>
 
@@ -108,5 +101,20 @@ export function Sidebar() {
         </div>
       </div>
     </>
+  );
+}
+
+type InputTypeProps = { value: FilterType; label: string };
+function InputType({ value, label }: InputTypeProps) {
+  return (
+    <label>
+      <input
+        type="radio"
+        name="type-tag"
+        checked={filter.type === value}
+        onChange={() => filter.setType(value)}
+      />
+      <span class="text-slate-200 text-base pl-2 cursor-pointer">{label}</span>
+    </label>
   );
 }
