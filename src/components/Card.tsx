@@ -3,10 +3,10 @@ import { ExternalLink } from "./ExternalLink";
 import { For } from "solid-js";
 import { CardBadge } from "./CardBadge";
 
-export function Card(props: Codepen) {
+export function Card(props: Playground) {
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article class="overflow-hidden rounded-lg shadow-lg dark:shadow-slate-700">
+      <article class="overflow-hidden rounded-lg shadow-card hover:shadow-card-xl transition-shadow">
         <div class="overflow-hidden">
           <ExternalLink href={`${endpoint}/${props.src}`}>
             <img

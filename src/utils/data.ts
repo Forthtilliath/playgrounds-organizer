@@ -35,7 +35,7 @@ export const tags = [
   "absolute",
 ] as const;
 
-export const codepens: Codepen[] = [
+export const playgrounds: Playground[] = [
   {
     id: 1,
     tags: ["layout", "footer", "css"],
@@ -210,7 +210,7 @@ export const codepens: Codepen[] = [
     src: "pen/poropzG?editors=0100",
     title: "Ma commande en flex",
   },
-  // 
+  //
   {
     id: 30,
     tags: ["css", "pseudo-elements", "absolute"],

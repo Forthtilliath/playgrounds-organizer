@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 import { Card } from "~/components/Card";
 import { Sidebar } from "~/components/Sidebar";
-import { codepens } from "~/utils/data";
+import { playgrounds } from "~/utils/data";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
 
       <div class="my-12 mx-auto px-4 md:px-12">
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
-          <For each={codepens} fallback="Chargement...">
+          <For each={playgrounds} fallback="Chargement...">
             {(codepen) => <Card {...codepen} />}
           </For>
         </div>
