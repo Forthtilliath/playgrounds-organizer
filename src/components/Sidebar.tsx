@@ -1,11 +1,13 @@
-import { For, createEffect, createSignal } from "solid-js";
-import { tags } from "~/utils/data";
-import { filter } from "~/utils/stores/filter";
+import { For, Show, createEffect, createSignal } from "solid-js";
+import { cn } from "~/helpers/tailwind";
+import { tags } from "~/lib/data";
+import { filterStore } from "~/lib/stores/filterStore";
+import { DividerWithLabel } from "./utils/Divider";
+
+const [open, setOpen] = createSignal(true);
 
 export function Sidebar() {
-  const [open, setOpen] = createSignal(true);
-
-  createEffect(() => console.log(filter.type));
+  createEffect(() => console.log(filterStore.type));
 
   return (
     <>
@@ -26,17 +28,11 @@ export function Sidebar() {
       {/* Sidebar */}
       <div
         id="drawer-navigation"
-        class="fixed top-0 left-0 z-40 w-72 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+        class="fixed top-0 left-0 z-40 w-72 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-slate-900"
         classList={{ "translate-x-0": open() }}
         tabindex="-1"
         aria-labelledby="drawer-navigation-label"
       >
-        <h5
-          id="drawer-navigation-label"
-          class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-        >
-          Filtres
-        </h5>
         <button
           type="button"
           onClick={() => setOpen(false)}
@@ -60,46 +56,61 @@ export function Sidebar() {
           <span class="sr-only">Close menu</span>
         </button>
 
-        <div class="mt-3">
-          <p class="text-base font-semibold text-gray-500 dark:text-gray-400">
-            Les projets doivent :
-          </p>
-          <div class="mt-2 flex flex-col gap-2">
-            <InputType value="conjunction" label="avoir tous les tags" />
-            <InputType value="disjunction" label="avoir au moins un tag" />
+        <h5
+          id="drawer-navigation-label"
+          class="text-lg font-semibold text-gray-500 uppercase dark:text-slate-50 mb-2"
+        >
+          Filtres
+        </h5>
+
+        <DividerWithLabel>Préférence</DividerWithLabel>
+
+        <div>
+          <div class="flex flex-col gap-2">
+            <InputType value="conjunction" label="Inclure tous les tags" />
+            <InputType value="disjunction" label="Inclure au moins un tag" />
           </div>
         </div>
 
-        <div class="py-4 overflow-y-auto">
-          <p class="text-base font-semibold text-gray-500 dark:text-gray-400">
-            Sélectionner les tags :
-          </p>
+        <DividerWithLabel>Liste des tags</DividerWithLabel>
+
+        <div class="overflow-y-auto">
           <ul class="space-y-2 font-medium mt-2">
             <For each={tags}>
               {(tag) => (
                 <li>
-                  <a
-                    href="#"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  <label
+                    class={cn(
+                      "flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer transition-[background-color]",
+                      {
+                        "bg-sky-700 dark:hover:bg-sky-600":
+                          filterStore.tags.includes(tag),
+                      }
+                    )}
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                      <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span class="ml-3">{tag}</span>
-                  </a>
+                    <input
+                      type="checkbox"
+                      value={tag}
+                      checked={filterStore.tags.includes(tag)}
+                      onChange={() => filterStore.toggleTag(tag)}
+                      class="appearance-none"
+                    />
+                    <span class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                      {tag}
+                    </span>
+                  </label>
                 </li>
               )}
             </For>
           </ul>
         </div>
       </div>
+      <Show when={open()}>
+        <div
+          class="fixed inset-0 z-30 bg-black/70"
+          onClick={() => setOpen(false)}
+        />
+      </Show>
     </>
   );
 }
@@ -107,14 +118,24 @@ export function Sidebar() {
 type InputTypeProps = { value: FilterType; label: string };
 function InputType({ value, label }: InputTypeProps) {
   return (
-    <label>
+    <label
+      class={cn(
+        "flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer transition-[background-color]",
+        {
+          "bg-sky-700 dark:hover:bg-sky-600": filterStore.type === value,
+        }
+      )}
+    >
       <input
         type="radio"
         name="type-tag"
-        checked={filter.type === value}
-        onChange={() => filter.setType(value)}
+        checked={filterStore.type === value}
+        onChange={() => filterStore.setType(value)}
+        class="appearance-none"
       />
-      <span class="text-slate-200 text-base pl-2 cursor-pointer">{label}</span>
+      <span class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+        {label}
+      </span>
     </label>
   );
 }
