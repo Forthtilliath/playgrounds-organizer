@@ -1,4 +1,4 @@
-import { endpoint, pathImage } from "~/utils/data";
+import { endpoint, pathImage } from "~/lib/data";
 import { ExternalLink } from "./ExternalLink";
 import { For } from "solid-js";
 import { CardBadge } from "./CardBadge";
