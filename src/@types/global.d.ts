@@ -1,4 +1,4 @@
-import { tags } from "~/utils/data";
+import { tags } from "~/lib/data";
 
 declare global {
   type Tag = (typeof tags)[number];
@@ -17,8 +17,9 @@ declare global {
     tags: Tag[];
     type: FilterType;
 
-    addTagToFilter: (tag: Tag) => void;
-    removeTagToFilter: (tag: Tag) => void;
+    addTag: (tag: Tag) => void;
+    removeTag: (tag: Tag) => void;
+    toggleTag: (tag: Tag) => void;
     setType: (type: FilterType) => void;
   };
 }
