@@ -1,4 +1,4 @@
-import { tags } from "~/lib/data";
+import { tags } from "~/lib/data/tags";
 
 declare global {
   type Tag = (typeof tags)[number];

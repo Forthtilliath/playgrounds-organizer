@@ -1,8 +1,8 @@
-import { For, Show, createEffect, createSignal } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 import { cn } from "~/helpers/tailwind";
-import { tags } from "~/lib/data";
 import { filterStore } from "~/lib/stores/filterStore";
 import { DividerWithLabel } from "./utils/Divider";
+import { tags } from "~/lib/data/tags";
 
 const [open, setOpen] = createSignal(false);
 

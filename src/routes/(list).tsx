@@ -1,7 +1,7 @@
-import { For, ParentProps, Show } from "solid-js";
+import { For, Show } from "solid-js";
 import { Card } from "~/components/Card";
 import { Sidebar } from "~/components/Sidebar";
-import { playgrounds } from "~/lib/data";
+import { playgrounds } from "~/lib/data/playgrounds";
 import { filterStore } from "~/lib/stores/filterStore";
 
 export default function Home() {

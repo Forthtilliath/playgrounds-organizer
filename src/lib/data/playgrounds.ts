@@ -1,41 +1,4 @@
-export const endpoint = "https://codepen.io/forthtilliath";
-export const pathImage = "./assets/projects";
-export const tags = [
-  "layout",
-  "flex",
-  "footer",
-  "defi",
-  "css",
-  "colors",
-  "js",
-  "select",
-  "customElements",
-  "array",
-  "button",
-  "radio",
-  "grid",
-  "game",
-  "image",
-  "background",
-  "transparence",
-  "marquee",
-  "defilement",
-  "animation",
-  "infinie",
-  "openclassroom",
-  "overflow",
-  "loader",
-  "modal",
-  "file",
-  "theme",
-  "intersectionObserver",
-  "setTimeout",
-  "requestAnimationFrame",
-  "pseudo-elements",
-  "absolute",
-] as const;
-
-export const playgrounds: Playground[] = [
+export const playgrounds: Readonly<Playground[]> = Object.freeze([
   {
     id: 1,
     tags: ["layout", "footer", "css"],
@@ -229,4 +192,4 @@ export const playgrounds: Playground[] = [
     src: "pen/rNzLEGV?editors=1010",
     title: "Header with absolute logo and border",
   },
-];
+]);

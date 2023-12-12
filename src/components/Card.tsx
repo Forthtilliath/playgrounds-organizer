@@ -1,7 +1,7 @@
-import { endpoint, pathImage } from "~/lib/data";
 import { ExternalLink } from "./ExternalLink";
 import { For } from "solid-js";
 import { CardBadge } from "./CardBadge";
+import { endpoint, pathImage } from "~/lib/data/app";
 
 export function Card(props: Playground) {
   return (
