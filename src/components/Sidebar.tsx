@@ -4,11 +4,9 @@ import { tags } from "~/lib/data";
 import { filterStore } from "~/lib/stores/filterStore";
 import { DividerWithLabel } from "./utils/Divider";
 
-const [open, setOpen] = createSignal(true);
+const [open, setOpen] = createSignal(false);
 
 export function Sidebar() {
-  createEffect(() => console.log(filterStore.type));
-
   return (
     <>
       {/* Button */}
