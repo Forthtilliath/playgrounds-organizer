@@ -26,5 +26,13 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "solid-start>vite": "5",
+        "solid-start>@solidjs/router": "0.9.1"
+      }
+    }
   }
 }
