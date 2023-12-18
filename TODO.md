@@ -6,6 +6,7 @@ Créer un store pour les tags
 - [ ] : Codepens affichés en fonction des tags
 - [ ] : Filter tags => update tags instantly
 - [ ] : URL : AND => `/?q=css+array` / OR => `/?q=css|array`
+- [ ] : Convertir toutes les imanges en webp
 
 Array.from(new URLSearchParams(window.location.search))
 
