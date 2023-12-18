@@ -1,10 +1,34 @@
-import { For, Show } from "solid-js";
+import { For, Show, createEffect } from "solid-js";
 import { Card } from "~/components/Card";
 import { Sidebar } from "~/components/Sidebar";
 import { playgrounds } from "~/lib/data/playgrounds";
+import { useSerializedSearchParams } from "~/lib/hooks/useSerializedSearchParams";
 import { filterStore } from "~/lib/stores/filterStore";
+import { z } from "zod";
+
+const paramsSchema = z.object({
+  a: z.string(),
+  b: z.array(z.coerce.number()),
+  c: z.array(z.string()),
+  d: z.coerce.number(),
+});
 
 export default function Home() {
+  const searchParams =
+    useSerializedSearchParams(paramsSchema);
+
+  createEffect(() => {
+    console.group("=============");
+    console.log({ ...searchParams.searchParams });
+    console.log("a", searchParams.get("a"));
+    console.log("b", searchParams.get("b"));
+    console.log("c", searchParams.get("c"));
+    // console.log(searchParams.getAll());
+    console.groupEnd();
+  });
+  // searchParams.set("a", "aaa")
+  searchParams.set("b", [1,2,3])
+
   const filteredPlaygrounds = () =>
     playgrounds.filter((p) => {
       if (filterStore.type === "conjunction") {
