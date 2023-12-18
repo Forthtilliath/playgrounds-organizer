@@ -1,18 +1,24 @@
 import { ExternalLink } from "./ExternalLink";
-import { For } from "solid-js";
+import { For, JSX } from "solid-js";
 import { CardBadge } from "./CardBadge";
 import { endpoint, pathImage } from "~/lib/data/app";
 
 export function Card(props: Playground) {
+  const codepenSlug = /https:\/\/codepen\.io\/forthtilliath\/(?:pen|full)\/(\w*)/.exec(props.src);
+
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article class="overflow-hidden rounded-lg shadow-card hover:shadow-card-xl transition-shadow">
+      <article class="overflow-hidden rounded-lg shadow-card group hover:shadow-card-xl transition-shadow">
         <div class="overflow-hidden">
-          <ExternalLink href={`${endpoint}/${props.src}`}>
+          <ExternalLink href={props.src}>
             <img
               alt="Placeholder"
-              class="block h-auto w-full hover:scale-110 transform transition-transform duration-200 aspect-[96/47] object-cover"
-              src={`${pathImage}/${props.id}.png`}
+              class="block h-auto w-full brightness-75 hover:brightness-100 transform transition-transform duration-200 aspect-[96/47] object-cover"
+              src={`https://shots.codepen.io/username/pen/${codepenSlug?.[1]}/-512.webp`}
+              onError={(e) => {
+                e.currentTarget.onerror = null; // prevents looping
+                e.currentTarget.src = `${pathImage}/not-found.webp`;
+              }}
             />
           </ExternalLink>
         </div>
