@@ -5,5 +5,9 @@ export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
 }
 
 export function setUrl(newUrl: string) {
-  window.history.pushState(null, "", newUrl)
+  window.history.pushState(null, "", newUrl);
+}
+
+export function asArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value];
 }

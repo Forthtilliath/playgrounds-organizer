@@ -20,6 +20,9 @@ const [filter, setFilter] = createStore<FilterStore>({
       }
     });
   },
+  setTags(tags: FilterStore["tags"]) {
+    setFilter("tags", tags);
+  },
   setType(type: FilterStore["type"]) {
     setFilter("type", type);
   },

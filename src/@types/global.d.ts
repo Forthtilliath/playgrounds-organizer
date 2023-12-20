@@ -20,6 +20,7 @@ declare global {
     addTag: (tag: Tag) => void;
     removeTag: (tag: Tag) => void;
     toggleTag: (tag: Tag) => void;
+    setTags: (tags: Tag[]) => void;
     setType: (type: FilterType) => void;
   };
 }

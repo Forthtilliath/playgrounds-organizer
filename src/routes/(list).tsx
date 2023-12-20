@@ -1,33 +1,16 @@
 import { For, Show, createEffect } from "solid-js";
 import { Card } from "~/components/Card";
 import { Sidebar } from "~/components/Sidebar";
+import { asArray } from "~/helpers/methods";
 import { playgrounds } from "~/lib/data/playgrounds";
 import { useSerializedSearchParams } from "~/lib/hooks/useSerializedSearchParams";
+import { paramsSchema } from "~/lib/schemas/querySchema";
 import { filterStore } from "~/lib/stores/filterStore";
-import { z } from "zod";
-
-const paramsSchema = z.object({
-  a: z.string(),
-  b: z.array(z.coerce.number()),
-  c: z.array(z.string()),
-  d: z.coerce.number(),
-});
 
 export default function Home() {
-  const searchParams =
-    useSerializedSearchParams(paramsSchema);
-
-  createEffect(() => {
-    console.group("=============");
-    console.log({ ...searchParams.searchParams });
-    console.log("a", searchParams.get("a"));
-    console.log("b", searchParams.get("b"));
-    console.log("c", searchParams.get("c"));
-    // console.log(searchParams.getAll());
-    console.groupEnd();
-  });
-  // searchParams.set("a", "aaa")
-  searchParams.set("b", [1,2,3])
+  const { get: getSearchParams,getAll } = useSerializedSearchParams(paramsSchema);
+  filterStore.setType(getSearchParams("type"));
+  filterStore.setTags(asArray<Tag>(getSearchParams("tag")));
 
   const filteredPlaygrounds = () =>
     playgrounds.filter((p) => {
@@ -69,6 +52,14 @@ export default function Home() {
 
 type BadgeProps = { label: Tag };
 function Badge({ label }: BadgeProps) {
+  const searchParams = useSerializedSearchParams(paramsSchema, {
+    replace: true,
+  });
+  const handleRemoveTag = (tag: Tag) => {
+    filterStore.removeTag(tag);
+    searchParams.set("tag", filterStore.tags);
+  };
+
   return (
     <span
       id="badge-dismiss-default"
@@ -80,7 +71,8 @@ function Badge({ label }: BadgeProps) {
         class="inline-flex items-center p-1 ms-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-300"
         data-dismiss-target="#badge-dismiss-default"
         aria-label="Remove"
-        onClick={() => filterStore.removeTag(label)}
+        onClick={() => handleRemoveTag(label)}
+        // onClick={() => filterStore.removeTag(label)}
       >
         <svg
           class="w-2 h-2"

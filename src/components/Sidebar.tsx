@@ -3,10 +3,20 @@ import { cn } from "~/helpers/tailwind";
 import { filterStore } from "~/lib/stores/filterStore";
 import { DividerWithLabel } from "./utils/Divider";
 import { tags } from "~/lib/data/tags";
+import { useSerializedSearchParams } from "~/lib/hooks/useSerializedSearchParams";
+import { paramsSchema } from "~/lib/schemas/querySchema";
 
 const [open, setOpen] = createSignal(false);
 
 export function Sidebar() {
+  const searchParams = useSerializedSearchParams(paramsSchema, {
+    replace: true,
+  });
+  const handleToggleTag = (tag: Tag) => {
+    filterStore.toggleTag(tag);
+    searchParams.set("tag", filterStore.tags);
+  };
+
   return (
     <>
       {/* Button */}
@@ -90,7 +100,7 @@ export function Sidebar() {
                       type="checkbox"
                       value={tag}
                       checked={filterStore.tags.includes(tag)}
-                      onChange={() => filterStore.toggleTag(tag)}
+                      onChange={() => handleToggleTag(tag)}
                       class="appearance-none"
                     />
                     <span class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
@@ -115,6 +125,14 @@ export function Sidebar() {
 
 type InputTypeProps = { value: FilterType; label: string };
 function InputType({ value, label }: InputTypeProps) {
+  const searchParams = useSerializedSearchParams(paramsSchema, {
+    replace: true,
+  });
+  const handleChangeType = () => {
+    filterStore.setType(value);
+    searchParams.set("type", value);
+  };
+
   return (
     <label
       class={cn(
@@ -128,7 +146,7 @@ function InputType({ value, label }: InputTypeProps) {
         type="radio"
         name="type-tag"
         checked={filterStore.type === value}
-        onChange={() => filterStore.setType(value)}
+        onChange={handleChangeType}
         class="appearance-none"
       />
       <span class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
