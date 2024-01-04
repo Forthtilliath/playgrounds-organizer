@@ -1,4 +1,4 @@
-import { For, Show, createEffect } from "solid-js";
+import { For, Show } from "solid-js";
 import { Card } from "~/components/Card";
 import { Sidebar } from "~/components/Sidebar";
 import { asArray } from "~/helpers/methods";
@@ -8,7 +8,7 @@ import { paramsSchema } from "~/lib/schemas/querySchema";
 import { filterStore } from "~/lib/stores/filterStore";
 
 export default function Home() {
-  const { get: getSearchParams,getAll } = useSerializedSearchParams(paramsSchema);
+  const { get: getSearchParams } = useSerializedSearchParams(paramsSchema);
   filterStore.setType(getSearchParams("type"));
   filterStore.setTags(asArray<Tag>(getSearchParams("tag")));
 
