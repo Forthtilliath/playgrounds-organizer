@@ -1,4 +1,8 @@
-# SolidStart
+# Playgrounds Organizer
+
+![License](https://img.shields.io/github/license/forthtilliath/playgrounds-organizer?style=for-the-badge) [![SolidJS](https://img.shields.io/badge/SolidJS-2C4F7C?style=for-the-badge&logo=solid&logoColor=white)](https://www.solidjs.com/) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white&style=for-the-badge) [![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](https://zod.dev/)
+
+> Organisateur pour regrouper les différents playgrounds réalisés sur CodePen, CodeSandbox, StackBlitz...
 
 Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
